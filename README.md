@@ -24,18 +24,20 @@
 
 ## 🌟 주요 기능
 
-1. **6대 필수 섹션 구성**:
-   - `Hero`: 인사말, 직무(AI & 백엔드 엔지니어), Codyssey 동료학습 배지, 사람을 위한 가치 지향 소개 및 CTA 앵커 버튼
-   - `About`: 개발 가치관(사람을 위한 개발자), Codyssey AI 과정 동료학습 & 상호 평가, MIS 유지보수 및 차세대 개발 실무 경험(1년), 배드민턴 취미 및 프로필 이미지
-   - `Skills`: Backend, Database, Web Basics, Tools 4개 그룹별 기술 스택 목록
+1. **6대 필수 섹션 구성 및 내러티브 시점 일치화**:
+   - `Hero`: 직무(AI & 백엔드 엔지니어), 엔지니어링 테크 그리드 배경 & 앰비언트 아우라, 데스크톱 프로필 터미널 카드(`cat engineer_profile.json`), CTA 앵커 버튼
+   - `About`: 개발 가치관(사람을 위한 개발자) → 실무 경험(MIS 유지보수 및 차세대 개발 1년) → 현재 도전(Codyssey AI 과정 동료학습 & 상호 평가) → 취미(배드민턴)의 자연스러운 시간순 서사 배치
+   - `Skills`: Backend, Database, Web Basics, Tools 4개 그룹별 기술 스택 목록 및 정밀 그리드 정렬
    - `Projects`: GitHub REST API 연동을 통한 최신 공개 저장소 카드 목록 렌더링
-   - `Contact`: 이름, 이메일, 문의 내용 실시간 유효성 검사 및 전송 성공 피드백 폼
-   - `Footer`: 저작권 표기 및 GitHub/Email 소셜 링크
-2. **반응형 인터랙션**:
+   - `Contact`: 직접 연락 채널 정보 카드(GitHub, Email, Location, Status)와 문의 폼의 좌우 시각적 밸런스 및 실시간 유효성 검사
+   - `Footer`: 저작권 표기(&copy; 2026 MyeongHwan Cho) 및 GitHub/Email 소셜 링크
+2. **반응형 인터랙션 & 네비게이션 최적화**:
+   - 상단 최우측 다크 모드 토글 버튼 재배치로 데스크톱/모바일 UI 균형 확보
    - 모바일 네비게이션 햄버거 메뉴 토글 (`classList.toggle('active')`)
    - 앵커 링크 부드러운 스크롤 이동 (`scroll-behavior: smooth`)
    - 스크롤 60px 이상 시 헤더 블러 및 배경색 스타일 전환
    - 스크롤 300px 이상 시 우측 하단 스크롤탑 버튼 노출 및 최상단 이동
+   - 페이지 최하단 도달 시 마지막 Contact 네비게이션 메뉴 자동 활성화 감지 로직
    - `IntersectionObserver`를 활용한 카드 및 섹션 스크롤 진입 페이드인 애니메이션
 3. **테마 영속화 (다크 모드)**:
    - 다크 모드 토글 버튼 및 `[data-theme="dark"]` CSS 변수 오버라이드
@@ -56,7 +58,7 @@
 | **Markup** | HTML5 Semantic Elements, WAI-ARIA, Google Fonts, Font Awesome | **준수** (외부 UI 프레임워크 미사용) |
 | **Styling** | CSS3 (:root 변수, Flexbox, Grid, Media Queries, Transition) | **준수** (인라인 스타일 `style="..."` 배제) |
 | **Scripting** | Vanilla JavaScript (ES6+, DOM API, Fetch API, IntersectionObserver) | **준수** (`var` 배제, `onclick` 배제, `defer` 연결) |
-| **VCS & Deploy** | Git, GitHub Pages | **준수** (독립 Git 저장소 관리) |
+| **VCS & Deploy** | Git, GitHub Pages | **준수** (독립 Git 저장소 및 원격 동기화 완료) |
 
 ---
 
@@ -75,7 +77,7 @@ projects/B1-1/
 │   └── main.js             # 햄버거, 다크모드, 폼 유효성, GitHub API 연동 스크립트
 │
 └── images/
-    └── profile.svg         # 프로필 아바타 벡터 이미지
+    └── profile.png         # 엔지니어 프로필 실물 사진 에셋
 ```
 
 ---
@@ -100,10 +102,10 @@ projects/B1-1/
 
 본 프로젝트는 GitHub Pages를 통해 무료로 정적 웹사이트를 호스팅할 수 있도록 모든 에셋 경로가 상대 경로로 설계되었습니다.
 
-1. **저장소 설정**: GitHub 레포지토리(`ChoMyeongHwan/vanilla-portfolio-website`) 이동
+1. **저장소 설정**: GitHub 레포지토리([ChoMyeongHwan/vanilla-portfolio-website](https://github.com/ChoMyeongHwan/vanilla-portfolio-website)) 이동
 2. **Pages 활성화**: **Settings** → **Pages** → **Build and deployment**
 3. **Source 설정**: `Deploy from a branch` 선택 후 Branch를 `main` / `/(root)`로 지정 후 저장
-4. **배포 URL**: `https://chomyeonghwan.github.io/vanilla-portfolio-website/`
+4. **배포 URL**: [https://chomyeonghwan.github.io/vanilla-portfolio-website/](https://chomyeonghwan.github.io/vanilla-portfolio-website/)
 
 ---
 
@@ -111,10 +113,13 @@ projects/B1-1/
 
 모든 커밋은 **한글 Conventional Commit 규칙을 준수하여 해당 과제 저장소 내부에서 독립적으로 생성되었습니다:**
 
-- `feat: 프로젝트 기본 구조 및 시맨틱 HTML5 6대 섹션 마크업 구현`
-- `feat: CSS 변수 기반 디자인 토큰 및 모바일 퍼스트 반응형 레이아웃 구현`
-- `feat: 모바일 햄버거 메뉴, 스크롤탑 및 Intersection Observer 애니메이션 구현`
-- `feat: 다크 모드 테마 전환 및 로컬스토리지 영속화 구현`
-- `feat: Contact 폼 실시간 유효성 검사 및 사용자 피드백 상태 처리 구현`
-- `feat: GitHub API 비동기 통신 및 4대 상태(로딩·성공·에러·빈데이터) UI 구현`
-- `docs: 프로젝트 README 작성 및 GitHub Pages 배포 설정 완료`
+- `docs: 서사 시점 일치화(과거 실무→현재 도전) 및 최신 산출물·커밋 이력 동기화`
+- `ba507bc`: `feat: Hero 섹션 엔지니어링 테크 그리드 배경 및 데스크톱 프로필 터미널 카드 추가`
+- `c9181e7`: `feat: 신규 프로필 이미지 적용, 히어로 타이포그래피 정제 및 Contact 좌우 밸런스 카드 추가`
+- `922e1a3`: `feat: Skills 및 Projects 섹션 수평·수직 그리드 정렬 및 타이포그래피 정밀 개선`
+- `0aa7044`: `feat: 데스크톱 다크모드 토글 버튼 상단 최우측 재배치 및 헤더 레이아웃 최적화`
+- `eeda971`: `feat: Codyssey 동료학습 프로필 반영, 개발 가치관 갱신, 프리미엄 UI 전면 리뉴얼 및 네비게이션 활성화 개선`
+- `677b9e7`: `docs: 프로젝트 README 작성 및 GitHub Pages 배포 설정 완료`
+- `b239e14`: `feat: 모바일 햄버거 메뉴, 다크 모드, 폼 유효성 및 GitHub API 연동 구현`
+- `df56979`: `feat: CSS 변수 기반 디자인 토큰 및 모바일 퍼스트 반응형 레이아웃 구현`
+- `e436994`: `feat: 프로젝트 기본 구조 및 시맨틱 HTML5 6대 섹션 마크업 구현`
