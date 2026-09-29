@@ -115,25 +115,49 @@ const handleWindowScroll = () => {
 
 /**
  * 현재 보이는 섹션에 맞추어 네비게이션 활성 링크 업데이트
+ * (Contact 섹션 등 최하단 섹션이 브라우저 뷰포트 한계로 활성화되지 않는 문제 완벽 해결)
  */
 const highlightActiveNavLink = () => {
   const sections = document.querySelectorAll('main section[id]');
-  const scrollPosition = window.scrollY + 100;
+  const navLinks = document.querySelectorAll('.nav-link');
+  const scrollY = window.scrollY;
+  const headerHeight = header ? header.offsetHeight : 70;
+  
+  // 1. 페이지 최하단(바닥)에 도달했는지 확인 (푸터가 보이거나 바닥 근처일 때 마지막 메뉴인 Contact 활성화)
+  const isAtBottom = (window.innerHeight + scrollY) >= (document.documentElement.scrollHeight - 80);
+  
+  if (isAtBottom) {
+    navLinks.forEach((link) => link.classList.remove('active'));
+    const contactLink = document.querySelector('.nav-link[href="#contact"]');
+    if (contactLink) {
+      contactLink.classList.add('active');
+    }
+    return;
+  }
+
+  // 2. 일반 스크롤 영역: 뷰포트 상단 기준선(헤더 높이 + 60px)을 지나는 섹션 감지
+  let currentActiveId = '';
+  const triggerPoint = scrollY + headerHeight + 60;
 
   sections.forEach((section) => {
     const sectionTop = section.offsetTop;
     const sectionHeight = section.offsetHeight;
-    const sectionId = section.getAttribute('id');
-    const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-
-    if (navLink) {
-      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-        navLink.classList.add('active');
-      } else {
-        navLink.classList.remove('active');
-      }
+    if (triggerPoint >= sectionTop && triggerPoint < sectionTop + sectionHeight) {
+      currentActiveId = section.getAttribute('id');
     }
   });
+
+  // 섹션 ID에 매칭되는 네비게이션 링크 활성화
+  if (currentActiveId) {
+    navLinks.forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href === `#${currentActiveId}`) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
 };
 
 /**
