@@ -600,7 +600,7 @@ button {
 }
 
 /* ==========================================================================
-   6. Skills 섹션
+   6. Skills 섹션 (정밀 그리드 및 일체형 정렬)
    ========================================================================== */
 .skills-section {
   background-color: var(--bg-primary);
@@ -610,14 +610,18 @@ button {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-lg);
+  align-items: stretch;
 }
 
 .skill-group {
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
+  padding: 1.5rem;
   box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
 }
 
@@ -630,57 +634,83 @@ button {
 .skill-group-header {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
-  padding-bottom: var(--spacing-sm);
+  gap: 0.85rem;
+  min-height: 48px;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid var(--border-color);
 }
 
-.skill-icon {
-  font-size: var(--font-size-xl);
-  color: var(--primary);
-  width: 40px;
-  height: 40px;
+.skill-icon-box {
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--primary-light);
+  background: var(--primary-light);
+  color: var(--primary);
   border-radius: var(--radius-md);
+  font-size: 1.15rem;
+  flex-shrink: 0;
 }
 
 .skill-group-title {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-base);
   font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .skill-list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: 0.65rem;
+  flex-grow: 1;
 }
 
 .skill-item {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  padding: 0.4rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
   background-color: var(--bg-primary);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
+  font-size: var(--font-size-sm);
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
+  color: var(--text-secondary);
+  min-height: 44px;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
 }
 
-.skill-item::before {
-  content: "✔";
-  font-size: var(--font-size-xs);
+.skill-item:hover {
+  border-color: var(--primary);
+  background-color: var(--primary-light);
+  transform: translateX(2px);
+}
+
+.skill-check-badge {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  background-color: var(--primary-light);
   color: var(--primary);
-  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  flex-shrink: 0;
+}
+
+.skill-text {
+  flex-grow: 1;
+  line-height: 1.35;
+  word-break: keep-all;
 }
 
 /* ==========================================================================
-   7. Projects 섹션 (CSS Grid auto-fit & minmax)
+   7. Projects 섹션 (균일 카드 높이 및 메타 데이터 정렬)
    ========================================================================== */
 .projects-section {
   background-color: var(--bg-secondary);
@@ -690,15 +720,16 @@ button {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: var(--spacing-xl);
+  align-items: stretch;
 }
 
 .project-card {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -706,6 +737,7 @@ button {
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
   position: relative;
   overflow: hidden;
+  height: 100%;
 }
 
 .project-card::before {
@@ -714,7 +746,7 @@ button {
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px;
+  height: 3px;
   background: var(--primary-gradient);
   opacity: 0;
   transition: opacity var(--transition-fast);
@@ -730,19 +762,62 @@ button {
   opacity: 1;
 }
 
-.project-card-header {
-  margin-bottom: var(--spacing-md);
+.project-card-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.project-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background-color: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+.project-external-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.project-external-btn:hover {
+  color: var(--primary);
+  transform: translate(2px, -2px);
 }
 
 .project-title {
-  font-size: var(--font-size-lg);
+  font-size: 1.0625rem;
   font-weight: 700;
-  margin-bottom: var(--spacing-xs);
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  min-height: 3rem;
   display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  word-break: break-word;
-  overflow-wrap: break-word;
+  align-items: flex-start;
+  word-break: break-all;
+}
+
+.project-title a {
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
 }
 
 .project-title a:hover {
@@ -752,11 +827,14 @@ button {
 .project-desc {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: var(--spacing-lg);
-  flex-grow: 1;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+  min-height: 5rem;
   word-break: keep-all;
-  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .project-meta {
@@ -766,16 +844,32 @@ button {
   font-size: var(--font-size-xs);
   color: var(--text-muted);
   border-top: 1px solid var(--border-color);
-  padding-top: var(--spacing-md);
+  padding-top: 1rem;
+  margin-top: auto;
 }
 
 .project-lang {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   font-weight: 600;
   color: var(--text-secondary);
 }
+
+.lang-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  background-color: var(--text-muted);
+}
+
+.lang-javascript { background-color: #f7df1e; }
+.lang-python { background-color: #3572A5; }
+.lang-java { background-color: #b07219; }
+.lang-css { background-color: #563d7c; }
+.lang-html, .lang-web { background-color: #e34c26; }
+.lang-shell { background-color: #89e051; }
 
 .project-stars {
   display: flex;
@@ -783,6 +877,10 @@ button {
   gap: 5px;
   color: #eab308;
   font-weight: 600;
+  background-color: var(--bg-primary);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
 }
 
 /* State Containers */

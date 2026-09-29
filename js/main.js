@@ -344,16 +344,24 @@ const renderSuccessState = (repos) => {
 
     return `
       <article class="project-card">
-        <div class="project-card-header">
+        <div class="project-card-top">
+          <div class="project-header-row">
+            <span class="project-icon-box" aria-hidden="true">
+              <i class="fa-solid fa-book-bookmark"></i>
+            </span>
+            <a href="${html_url}" target="_blank" rel="noopener noreferrer" class="project-external-btn" aria-label="${name} 저장소 바로가기">
+              <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </a>
+          </div>
           <h3 class="project-title">
-            <i class="fa-solid fa-book-bookmark" aria-hidden="true"></i>
             <a href="${html_url}" target="_blank" rel="noopener noreferrer">${name}</a>
           </h3>
           <p class="project-desc">${description || '등록된 프로젝트 설명이 없습니다.'}</p>
         </div>
         <div class="project-meta">
           <span class="project-lang">
-            <i class="fa-solid fa-code" aria-hidden="true"></i> ${language || 'Web'}
+            <span class="lang-dot lang-${(language || 'other').toLowerCase()}" aria-hidden="true"></span>
+            ${language || 'Web'}
           </span>
           <span class="project-stars">
             <i class="fa-solid fa-star" aria-hidden="true"></i> ${stargazers_count}
