@@ -23,31 +23,34 @@
         <span class="logo-accent">MyeongHwan</span>.dev
       </a>
       
-      <div class="header-controls">
-        <!-- 다크 모드 토글 버튼 -->
-        <button id="theme-toggle" class="theme-toggle-btn" aria-label="테마 전환" type="button">
-          <i class="fa-solid fa-moon theme-icon" aria-hidden="true"></i>
-          <span class="sr-only">테마 전환</span>
-        </button>
+      <!-- 우측 메뉴 & 컨트롤 그룹 -->
+      <div class="nav-right-group">
+        <!-- 네비게이션 메뉴 (앵커 링크 연결) -->
+        <nav id="nav-menu" class="nav-menu" aria-label="주요 메뉴">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="#hero" class="nav-link active">Home</a></li>
+            <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+            <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+            <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
 
-        <!-- 모바일 햄버거 버튼 -->
-        <button id="hamburger-btn" class="hamburger-btn" aria-label="모바일 메뉴 열기" aria-expanded="false" type="button">
-          <span class="hamburger-bar"></span>
-          <span class="hamburger-bar"></span>
-          <span class="hamburger-bar"></span>
-        </button>
+        <div class="header-controls">
+          <!-- 다크 모드 토글 버튼 (상단 최우측 배치) -->
+          <button id="theme-toggle" class="theme-toggle-btn" aria-label="테마 전환" type="button">
+            <i class="fa-solid fa-moon theme-icon" aria-hidden="true"></i>
+            <span class="sr-only">테마 전환</span>
+          </button>
+
+          <!-- 모바일 햄버거 버튼 -->
+          <button id="hamburger-btn" class="hamburger-btn" aria-label="모바일 메뉴 열기" aria-expanded="false" type="button">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+          </button>
+        </div>
       </div>
-
-      <!-- 네비게이션 메뉴 (앵커 링크 연결) -->
-      <nav id="nav-menu" class="nav-menu" aria-label="주요 메뉴">
-        <ul class="nav-list">
-          <li class="nav-item"><a href="#hero" class="nav-link active">Home</a></li>
-          <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
-          <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
-          <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
     </div>
   </header>
 
