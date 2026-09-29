@@ -18,6 +18,7 @@
   --primary-light: #eff6ff;
   --primary-glow: rgba(37, 99, 235, 0.15);
   --primary-gradient: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  --grid-line-color: rgba(37, 99, 235, 0.05);
   
   --border-color: #e2e8f0;
   --border-subtle: #f1f5f9;
@@ -86,6 +87,7 @@
   --primary-light: rgba(59, 130, 246, 0.12);
   --primary-glow: rgba(59, 130, 246, 0.25);
   --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  --grid-line-color: rgba(59, 130, 246, 0.07);
 
   --border-color: #1e293b;
   --border-subtle: #141d2e;
@@ -415,18 +417,133 @@ button {
    4. Hero 섹션 (Modern Tech Aesthetic)
    ========================================================================== */
 .hero-section {
+  position: relative;
+  overflow: hidden;
   padding-top: calc(var(--header-height) + var(--spacing-3xl));
   padding-bottom: var(--spacing-3xl);
-  background: radial-gradient(circle at 50% 20%, var(--primary-light) 0%, transparent 60%);
+  background-color: var(--bg-primary);
   display: flex;
   align-items: center;
-  min-height: 82vh;
+  min-height: 85vh;
+}
+
+/* 엔지니어링 테크 그리드 배경 패턴 (마스크 방사형 감쇄) */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
+  background-size: 44px 44px;
+  background-position: center top;
+  -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 35%, #000 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 35%, #000 30%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 부드러운 앰비언트 오로라 글로우 */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  width: 750px;
+  height: 480px;
+  background: radial-gradient(circle, var(--primary-glow) 0%, rgba(99, 102, 241, 0.08) 50%, transparent 75%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .hero-content {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
+
+.hero-visual {
+  display: none;
+}
+
+.terminal-card {
+  background-color: #0b1120;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 25px rgba(59, 130, 246, 0.15);
+  overflow: hidden;
+  font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+}
+
+.terminal-header {
+  background-color: #080c16;
+  padding: 0.75rem 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.terminal-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-red { background-color: #ef4444; }
+.dot-yellow { background-color: #f59e0b; }
+.dot-green { background-color: #10b981; }
+
+.terminal-title {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.terminal-body {
+  padding: 1.25rem 1.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: #e2e8f0;
+}
+
+.terminal-line {
+  margin-bottom: 0.75rem;
+  color: #94a3b8;
+}
+
+.terminal-line .prompt {
+  color: #10b981;
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.terminal-line .cmd {
+  color: #60a5fa;
+}
+
+.terminal-code {
+  margin: 0;
+  white-space: pre;
+  font-family: inherit;
+  color: #cbd5e1;
+}
+
+.json-key { color: #60a5fa; }
+.json-str { color: #34d399; }
 
 .hero-badge {
   display: inline-flex;
@@ -1287,6 +1404,17 @@ button {
 
   .hero-title {
     font-size: var(--font-size-4xl);
+  }
+
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: var(--spacing-2xl);
+  }
+
+  .hero-visual {
+    display: block;
   }
 
   .skills-grid {
