@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI & 백엔드 개발자 조명환의 포트폴리오 웹사이트">
+  <title>조명환 | AI & 백엔드 개발자 포트폴리오</title>
+  <!-- Google Fonts & Font Awesome (PDF 명시적 허용 기술) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- JavaScript (defer 연결 필수 요구사항 준수) -->
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <!-- Header & Navigation (시맨틱 구조) -->
+  <header id="header" class="header">
+    <div class="container nav-wrapper">
+      <a href="#hero" class="logo" aria-label="홈으로 이동">
+        <span class="logo-accent">MyeongHwan</span>.dev
+      </a>
+      
+      <div class="header-controls">
+        <!-- 다크 모드 토글 버튼 -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="테마 전환" type="button">
+          <i class="fa-solid fa-moon theme-icon" aria-hidden="true"></i>
+          <span class="sr-only">테마 전환</span>
+        </button>
+
+        <!-- 모바일 햄버거 버튼 -->
+        <button id="hamburger-btn" class="hamburger-btn" aria-label="모바일 메뉴 열기" aria-expanded="false" type="button">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+
+      <!-- 네비게이션 메뉴 (앵커 링크 연결) -->
+      <nav id="nav-menu" class="nav-menu" aria-label="주요 메뉴">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#hero" class="nav-link active">Home</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+          <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- 1. Hero 섹션 -->
+    <section id="hero" class="hero-section">
+      <div class="container hero-content">
+        <div class="hero-text">
+          <p class="hero-greeting">안녕하세요</p>
+          <h1 class="hero-title">
+            <span class="highlight">조명환</span>입니다.
+          </h1>
+          <p class="hero-role">AI & 백엔드 개발자 (MyeongHwan Cho)</p>
+          <p class="hero-description">
+            1년간 MIS 운영·유지보수와 차세대 시스템 전환 프로젝트를 수행하며 기본기를 다져왔습니다.<br>
+            데이터의 신뢰성과 안정적인 비즈니스 로직 설계를 중요하게 생각합니다.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              <i class="fa-solid fa-folder-open" aria-hidden="true"></i> 프로젝트 보기
+            </a>
+            <a href="#contact" class="btn btn-secondary">
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i> 문의하기
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. About 섹션 -->
+    <section id="about" class="about-section section-padding">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">About Me</h2>
+          <p class="section-subtitle">문제 해결과 시스템 안정성에 집중하는 개발자입니다.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-image-wrapper">
+            <img src="images/profile.svg" alt="조명환 프로필 사진" class="profile-image" width="220" height="220">
+          </div>
+          <div class="about-details">
+            <article class="about-card">
+              <h3 class="about-card-title">
+                <i class="fa-solid fa-briefcase" aria-hidden="true"></i> 실무 경험
+              </h3>
+              <p>
+                사내 핵심 업무를 지원하는 MIS(경영정보시스템) 유지보수와 새로운 차세대 시스템 구축 프로젝트에서 1년 동안 실무를 경험했습니다.
+                기존 시스템의 정합성을 지키는 장애 대응부터 차세대 전환 시 요구되는 데이터 이관 및 업무 로직 구현을 담당했습니다.
+              </p>
+            </article>
+
+            <article class="about-card">
+              <h3 class="about-card-title">
+                <i class="fa-solid fa-compass" aria-hidden="true"></i> 개발 가치관
+              </h3>
+              <p>
+                단순히 동작하는 코드를 넘어, 비즈니스 흐름을 정확히 이해하고 예외 상황에서도 신뢰할 수 있는 설계를 추구합니다.
+                웹의 기초 원리인 "이벤트 → 상태 변경 → DOM 렌더링"의 흐름을 충실히 학습하여 탄탄한 기술적 기초를 쌓아가고 있습니다.
+              </p>
+            </article>
+
+            <article class="about-card">
+              <h3 class="about-card-title">
+                <i class="fa-solid fa-heart" aria-hidden="true"></i> 취미 및 에너지
+              </h3>
+              <p>
+                퇴근 후와 주말에는 배드민턴을 즐깁니다. 코트 위에서 빠르게 전개되는 랠리에 집중하고 즉각적으로 반응하는 과정에서
+                스트레스를 해소하고 체력을 기릅니다. 이 에너지는 복잡한 개발 이슈를 끈기 있게 풀어가는 원동력이 됩니다.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Skills 섹션 -->
+    <section id="skills" class="skills-section section-padding">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Technical Skills</h2>
+          <p class="section-subtitle">시스템 안정성과 웹 표준을 위해 활용하는 기술 스택입니다.</p>
+        </div>
+
+        <div class="skills-grid">
+          <article class="skill-group">
+            <div class="skill-group-header">
+              <i class="fa-solid fa-server skill-icon" aria-hidden="true"></i>
+              <h3 class="skill-group-title">Backend & Core</h3>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-item">Java / Spring Framework</li>
+              <li class="skill-item">RESTful API 설계 및 연동</li>
+              <li class="skill-item">MIS 시스템 비즈니스 로직 및 유지보수</li>
+              <li class="skill-item">차세대 데이터 이관 및 트랜잭션 관리</li>
+            </ul>
+          </article>
+
+          <article class="skill-group">
+            <div class="skill-group-header">
+              <i class="fa-solid fa-database skill-icon" aria-hidden="true"></i>
+              <h3 class="skill-group-title">Database & Data</h3>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-item">RDBMS (MySQL, PostgreSQL, Oracle)</li>
+              <li class="skill-item">SQL 쿼리 작성 및 데이터 모델링 기초</li>
+              <li class="skill-item">데이터 무결성 및 정합성 검증</li>
+              <li class="skill-item">Python 기반 기초 데이터 처리</li>
+            </ul>
+          </article>
+
+          <article class="skill-group">
+            <div class="skill-group-header">
+              <i class="fa-solid fa-code skill-icon" aria-hidden="true"></i>
+              <h3 class="skill-group-title">Web Basics & Frontend</h3>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-item">시맨틱 HTML5 & 웹 접근성(a11y)</li>
+              <li class="skill-item">모던 CSS3 (Flexbox, Grid, CSS Variables)</li>
+              <li class="skill-item">Vanilla JavaScript (ES6+, DOM, Fetch API)</li>
+              <li class="skill-item">모바일 퍼스트 반응형 웹 디자인</li>
+            </ul>
+          </article>
+
+          <article class="skill-group">
+            <div class="skill-group-header">
+              <i class="fa-solid fa-screwdriver-wrench skill-icon" aria-hidden="true"></i>
+              <h3 class="skill-group-title">Tools & Collaboration</h3>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-item">Git / GitHub 버전 관리</li>
+              <li class="skill-item">VS Code 개발 환경 & Live Server</li>
+              <li class="skill-item">Chrome DevTools 디버깅</li>
+              <li class="skill-item">GitHub Pages 정적 사이트 배포</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Projects 섹션 (GitHub API 연동 카드 렌더링 영역) -->
+    <section id="projects" class="projects-section section-padding">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Projects</h2>
+          <p class="section-subtitle">GitHub API와 실시간 연동되어 불러온 공개 저장소 목록입니다.</p>
+        </div>
+
+        <!-- 동적 렌더링 컨테이너 (로딩/성공/에러/빈상태가 주입됨) -->
+        <div id="projects-container" class="projects-grid" aria-live="polite">
+          <!-- 자바스크립트 초기 로딩 전 기본 안내 카드 구조 (시맨틱 article 유지) -->
+          <div class="state-container loading-state">
+            <div class="spinner" aria-hidden="true"></div>
+            <p class="state-text">GitHub 저장소 목록을 불러오는 중입니다...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Contact 섹션 (문의 폼) -->
+    <section id="contact" class="contact-section section-padding">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Contact</h2>
+          <p class="section-subtitle">협업 제안이나 질문이 있으시면 언제든 메시지를 남겨주세요.</p>
+        </div>
+
+        <div class="contact-wrapper">
+          <div class="contact-info">
+            <h3 class="contact-info-title">연락처 정보</h3>
+            <p class="contact-info-desc">
+              메시지를 보내주시면 빠른 시일 내에 확인 후 회신드리겠습니다.
+            </p>
+            <ul class="contact-info-list">
+              <li>
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                <span>1jmhcho@gmail.com</span>
+              </li>
+              <li>
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/ChoMyeongHwan" target="_blank" rel="noopener noreferrer">github.com/ChoMyeongHwan</a>
+              </li>
+              <li>
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                <span>대한민국</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 유효성 검사 폼 (for-id 레이블 매칭 및 접근성 준수) -->
+          <form id="contact-form" class="contact-form" novalidate>
+            <div class="form-group">
+              <label for="name" class="form-label">이름 <span class="required">*</span></label>
+              <input type="text" id="name" name="name" class="form-input" placeholder="성함을 입력해 주세요" autocomplete="name" required>
+              <span id="name-error" class="error-message" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">이메일 <span class="required">*</span></label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="example@domain.com" autocomplete="email" required>
+              <span id="email-error" class="error-message" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label">문의 내용 <span class="required">*</span></label>
+              <textarea id="message" name="message" class="form-textarea" rows="5" placeholder="문의하실 내용을 작성해 주세요" required></textarea>
+              <span id="message-error" class="error-message" role="alert"></span>
+            </div>
+
+            <button type="submit" id="submit-btn" class="btn btn-primary btn-block">
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> 메시지 전송
+            </button>
+
+            <!-- 제출 성공 피드백 안내 영역 -->
+            <div id="form-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (시맨틱 구조) -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="copyright">&copy; 2026 MyeongHwan Cho. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://github.com/ChoMyeongHwan" target="_blank" rel="noopener noreferrer" aria-label="GitHub 프로필 방문">
+          <i class="fa-brands fa-github" aria-hidden="true"></i>
+        </a>
+        <a href="mailto:1jmhcho@gmail.com" aria-label="이메일 보내기">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll-to-top 버튼 (인터랙션 준비) -->
+  <button id="scroll-top-btn" class="scroll-top-btn" aria-label="페이지 맨 위로 이동" type="button">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </button>
+</body>
+</html>
