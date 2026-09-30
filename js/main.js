@@ -209,33 +209,54 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * @param {HTMLInputElement | HTMLTextAreaElement} inputEl 
  * @param {HTMLElement} errorEl 
  * @param {string} fieldName 
+ * @param {boolean} isInitialTyping - 사용자가 오류가 없는 상태에서 처음 입력 중인지 여부
  * @returns {boolean} 유효 여부
  */
-const validateField = (inputEl, errorEl, fieldName) => {
+const validateField = (inputEl, errorEl, fieldName, isInitialTyping = false) => {
+  if (!inputEl || !errorEl) return false;
+
   const value = inputEl.value.trim();
 
-  // 필수값 검증
+  // 1. 필수값 검증
   if (!value) {
+    if (isInitialTyping) {
+      inputEl.classList.remove('invalid');
+      inputEl.removeAttribute('aria-invalid');
+      errorEl.innerHTML = '';
+      return false;
+    }
     inputEl.classList.add('invalid');
-    errorEl.textContent = `${fieldName}을(를) 입력해 주세요.`;
+    inputEl.setAttribute('aria-invalid', 'true');
+    errorEl.innerHTML = `<i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i> ${fieldName}을(를) 입력해 주세요.`;
     return false;
   }
 
-  // 이메일 형식 검증
-  if (inputEl.type === 'email' && !EMAIL_REGEX.test(value)) {
-    inputEl.classList.add('invalid');
-    errorEl.textContent = '올바른 이메일 주소 형식을 입력해 주세요 (예: example@domain.com)';
-    return false;
+  // 2. 이메일 형식 검증 (이메일 필드인 경우)
+  if (inputEl.type === 'email') {
+    const isValidEmail = EMAIL_REGEX.test(value);
+
+    // 처음 입력 중인데 아직 작성 중인 경우 성급한 경고 노출 방지
+    if (isInitialTyping && !isValidEmail) {
+      return false;
+    }
+
+    if (!isValidEmail) {
+      inputEl.classList.add('invalid');
+      inputEl.setAttribute('aria-invalid', 'true');
+      errorEl.innerHTML = `<i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i> 올바른 이메일 주소 형식을 입력해 주세요 (예: example@domain.com)`;
+      return false;
+    }
   }
 
-  // 통과
+  // 3. 통과 시 에러 상태 즉시 해제 및 정상 복구
   inputEl.classList.remove('invalid');
-  errorEl.textContent = '';
+  inputEl.setAttribute('aria-invalid', 'false');
+  errorEl.innerHTML = '';
   return true;
 };
 
 /**
- * 폼 전체 유효성 검사
+ * 폼 전체 유효성 검사 (제출 시 실행)
  */
 const validateForm = () => {
   const nameInput = document.getElementById('name');
@@ -245,9 +266,18 @@ const validateForm = () => {
   const messageInput = document.getElementById('message');
   const messageError = document.getElementById('message-error');
 
-  const isNameValid = validateField(nameInput, nameError, '이름');
-  const isEmailValid = validateField(emailInput, emailError, '이메일');
-  const isMessageValid = validateField(messageInput, messageError, '문의 내용');
+  const isNameValid = validateField(nameInput, nameError, '이름', false);
+  const isEmailValid = validateField(emailInput, emailError, '이메일', false);
+  const isMessageValid = validateField(messageInput, messageError, '문의 내용', false);
+
+  // 오류가 있는 첫 번째 필드로 부드럽게 자동 포커스 이동 (접근성 및 편의성 극대화)
+  if (!isNameValid && nameInput) {
+    nameInput.focus();
+  } else if (!isEmailValid && emailInput) {
+    emailInput.focus();
+  } else if (!isMessageValid && messageInput) {
+    messageInput.focus();
+  }
 
   return isNameValid && isEmailValid && isMessageValid;
 };
@@ -268,17 +298,27 @@ const handleFormSubmit = (e) => {
     formFeedback.className = 'form-feedback success';
     formFeedback.innerHTML = `
       <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-      <strong>메시지가 성공적으로 전송되었습니다!</strong> 빠른 시일 내에 회신드리겠습니다.
+      <span><strong>메시지가 성공적으로 전송되었습니다!</strong> 빠른 시일 내에 회신드리겠습니다.</span>
     `;
   }
 
-  // 폼 필드 초기화
+  // 폼 필드 초기화 및 에러 잔여 상태 일괄 해제
   contactForm.reset();
+  const formInputs = contactForm.querySelectorAll('.form-input, .form-textarea');
+  formInputs.forEach((input) => {
+    input.classList.remove('invalid');
+    input.removeAttribute('aria-invalid');
+  });
+  const errorElements = contactForm.querySelectorAll('.error-message');
+  errorElements.forEach((el) => {
+    el.innerHTML = '';
+  });
 
   // 5초 후 피드백 숨김
   setTimeout(() => {
     if (formFeedback) {
       formFeedback.className = 'form-feedback';
+      formFeedback.innerHTML = '';
     }
   }, 5000);
 };
@@ -508,7 +548,7 @@ const initApp = () => {
     scrollTopBtn.addEventListener('click', scrollToTop);
   }
 
-  // 폼 실시간 유효성 검사 (input 이벤트)
+  // 폼 유효성 검사 이벤트 바인딩 (blur & input 스마트 검증)
   const nameInput = document.getElementById('name');
   const nameError = document.getElementById('name-error');
   const emailInput = document.getElementById('email');
@@ -516,17 +556,25 @@ const initApp = () => {
   const messageInput = document.getElementById('message');
   const messageError = document.getElementById('message-error');
 
-  if (nameInput && nameError) {
-    nameInput.addEventListener('input', () => validateField(nameInput, nameError, '이름'));
-  }
+  const setupFieldValidation = (inputEl, errorEl, fieldName) => {
+    if (!inputEl || !errorEl) return;
 
-  if (emailInput && emailError) {
-    emailInput.addEventListener('input', () => validateField(emailInput, emailError, '이메일'));
-  }
+    // 포커스를 벗어날 때(blur): 공백 정리 및 엄격 검증
+    inputEl.addEventListener('blur', () => {
+      inputEl.value = inputEl.value.trim();
+      validateField(inputEl, errorEl, fieldName, false);
+    });
 
-  if (messageInput && messageError) {
-    messageInput.addEventListener('input', () => validateField(messageInput, messageError, '문의 내용'));
-  }
+    // 입력 중(input): 이미 에러 상태인 경우에만 실시간 즉시 해제 검증 적용
+    inputEl.addEventListener('input', () => {
+      const isAlreadyInvalid = inputEl.classList.contains('invalid');
+      validateField(inputEl, errorEl, fieldName, !isAlreadyInvalid);
+    });
+  };
+
+  setupFieldValidation(nameInput, nameError, '이름');
+  setupFieldValidation(emailInput, emailError, '이메일');
+  setupFieldValidation(messageInput, messageError, '문의 내용');
 
   // 폼 제출 이벤트
   if (contactForm) {

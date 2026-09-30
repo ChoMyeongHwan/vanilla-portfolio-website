@@ -24,10 +24,15 @@
   --border-subtle: #f1f5f9;
   --border-focus: #3b82f6;
   
-  --error-color: #ef4444;
+  --error-color: #dc2626;
   --error-bg: #fef2f2;
-  --success-color: #10b981;
+  --error-border: #ef4444;
+  --error-glow: rgba(220, 38, 38, 0.15);
+
+  --success-color: #059669;
   --success-bg: #ecfdf5;
+  --success-border: #10b981;
+  --success-glow: rgba(5, 150, 105, 0.15);
 
   /* Typography */
   --font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -97,6 +102,17 @@
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6), 0 4px 6px -4px rgb(0 0 0 / 0.5);
   --shadow-glow: 0 0 25px rgba(59, 130, 246, 0.3);
+
+  /* 에러 & 성공 상태 토큰 (다크모드 고대비 가독성 확보) */
+  --error-color: #f87171;
+  --error-bg: rgba(239, 68, 68, 0.14);
+  --error-border: #f87171;
+  --error-glow: rgba(248, 113, 113, 0.25);
+
+  --success-color: #34d399;
+  --success-bg: rgba(16, 185, 129, 0.14);
+  --success-border: #34d399;
+  --success-glow: rgba(52, 211, 153, 0.25);
 }
 
 /* ==========================================================================
@@ -1108,6 +1124,18 @@ button {
   width: 20px;
 }
 
+.contact-info-list a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.contact-info-list a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
 .contact-status-card {
   margin-top: var(--spacing-xl);
   padding: var(--spacing-md) var(--spacing-lg);
@@ -1181,25 +1209,58 @@ button {
   border-radius: var(--radius-md);
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  caret-color: var(--primary);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.form-input::placeholder, .form-textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.75;
 }
 
 .form-input:focus, .form-textarea:focus {
   border-color: var(--border-focus);
   background-color: var(--bg-secondary);
+  color: var(--text-primary);
   box-shadow: 0 0 0 4px var(--primary-glow);
+  outline: none;
 }
 
+/* 유효성 검사 실패 상태 (다크/라이트 모드 고대비 텍스트 & 테마 맞춤 배경 보장) */
 .form-input.invalid, .form-textarea.invalid {
+  border-color: var(--error-border);
+  background-color: var(--error-bg);
+  color: var(--text-primary);
+}
+
+.form-input.invalid:focus, .form-textarea.invalid:focus {
   border-color: var(--error-color);
   background-color: var(--error-bg);
+  color: var(--text-primary);
+  box-shadow: 0 0 0 4px var(--error-glow);
+  outline: none;
 }
 
 .error-message {
   font-size: var(--font-size-xs);
   color: var(--error-color);
-  min-height: 1.25em;
+  min-height: 1.35rem;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+.error-message:empty {
+  display: none;
+}
+
+.error-message i {
+  flex-shrink: 0;
+  font-size: 0.8rem;
 }
 
 .form-feedback {
@@ -1216,7 +1277,9 @@ button {
   gap: var(--spacing-sm);
   background-color: var(--success-bg);
   color: var(--success-color);
-  border: 1px solid var(--success-color);
+  border: 1px solid var(--success-border);
+  box-shadow: 0 4px 12px var(--success-glow);
+  font-weight: 500;
 }
 
 /* ==========================================================================
