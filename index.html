@@ -55,7 +55,7 @@
   </header>
 
   <!-- Main Content -->
-  <main>
+  <main aria-label="포트폴리오 본문 콘텐츠">
     <!-- 1. Hero 섹션 -->
     <section id="hero" class="hero-section">
       <div class="container hero-content">
@@ -298,6 +298,28 @@
         <div class="section-header">
           <h2 class="section-title">Projects</h2>
           <p class="section-subtitle">GitHub API와 실시간 연동되어 불러온 공개 저장소 목록입니다.</p>
+        </div>
+
+        <!-- 프로젝트 필터 버튼 바 (Array.filter 기반 카테고리 필터링) -->
+        <div class="project-filters" role="group" aria-label="프로젝트 언어 필터">
+          <button class="filter-btn active" data-filter="all" type="button">
+            <i class="fa-solid fa-layer-group" aria-hidden="true"></i> 전체
+          </button>
+          <button class="filter-btn" data-filter="JavaScript" type="button">
+            <span class="lang-dot lang-javascript" aria-hidden="true"></span> JavaScript
+          </button>
+          <button class="filter-btn" data-filter="Java" type="button">
+            <span class="lang-dot lang-java" aria-hidden="true"></span> Java
+          </button>
+          <button class="filter-btn" data-filter="Python" type="button">
+            <span class="lang-dot lang-python" aria-hidden="true"></span> Python
+          </button>
+          <button class="filter-btn" data-filter="HTML" type="button">
+            <span class="lang-dot lang-html" aria-hidden="true"></span> HTML
+          </button>
+          <button class="filter-btn" data-filter="CSS" type="button">
+            <span class="lang-dot lang-css" aria-hidden="true"></span> CSS
+          </button>
         </div>
 
         <!-- 동적 렌더링 컨테이너 (로딩/성공/에러/빈상태가 주입됨) -->
